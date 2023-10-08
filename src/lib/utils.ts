@@ -9,4 +9,13 @@ const compressFile = (imageFile: File, options = defaultOptions) => {
   return imageCompression(imageFile, options);
 };
 
-export { compressFile };
+const download = (file: Blob | File | MediaSource) => {
+  const url = URL.createObjectURL(file);
+  const link = document.createElement("a");
+  link.href = url;
+  link.setAttribute("download", "");
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+export { compressFile, download };

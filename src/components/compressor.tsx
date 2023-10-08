@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FileInput } from "@/components/file-input";
 import { ImagePreviewer } from "@/components/image-previewer";
 
-import { compressFile } from "@/lib/utils";
+import { compressFile, download } from "@/lib/utils";
 
 import type { ChangeEvent } from "react";
 
@@ -19,6 +19,14 @@ const Compressor = () => {
       const file = event.target.files[0];
       setSelectedImage(file);
     }
+  };
+
+  const handleDownload = () => {
+    if (!compressedImage) {
+      return;
+    }
+
+    download(compressedImage);
   };
 
   const handleCompressFile = async () => {
@@ -56,6 +64,14 @@ const Compressor = () => {
 
         <aside>
           <ImagePreviewer imageFile={compressedImage} />
+
+          <div className="button-wrapper">
+            {compressedImage ? (
+              <button onClick={handleDownload} className="downloadBtn">
+                Download
+              </button>
+            ) : null}
+          </div>
         </aside>
       </article>
     </section>
