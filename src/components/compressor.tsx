@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { FileInput } from "@/components/file-input";
+import { ImagePreviewer } from "@/components/image-previewer";
 
 import { compressFile } from "@/lib/utils";
 
@@ -37,6 +38,8 @@ const Compressor = () => {
 
       <article className="previewer">
         <aside>
+          <ImagePreviewer imageFile={selectedImage} />
+
           <div className="button-wrapper">
             {selectedImage ? (
               <button
@@ -49,6 +52,10 @@ const Compressor = () => {
               </button>
             ) : null}
           </div>
+        </aside>
+
+        <aside>
+          <ImagePreviewer imageFile={compressedImage} />
         </aside>
       </article>
     </section>
